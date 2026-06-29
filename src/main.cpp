@@ -1,3 +1,4 @@
+#include "RE/Skyrim.h"
 #include "SKSE/SKSE.h"
 
 namespace
@@ -36,17 +37,17 @@ namespace
 
 		REL::Relocation<std::uintptr_t> vtable{ RE::VTABLE_TESObjectBOOK[7] };
 
-		OriginalActivate = stl::unrestricted_cast<ActivateFunc_t>(
-			vtable.write_vfunc(0, stl::unrestricted_cast<std::uintptr_t>(&Hook_Activate)));
+		OriginalActivate = REL::stl::unrestricted_cast<ActivateFunc_t>(
+			vtable.write_vfunc(0, REL::stl::unrestricted_cast<std::uintptr_t>(&Hook_Activate)));
 
 		SKSE::log::info("Hooks installed.");
 	}
 }
 
 SKSEPluginInfo(
+	.Version = { 1, 0, 0, 0 },
 	.Name = "TM_SkillbooksEnhcancer",
 	.Author = "Thu'mundus",
-	.Version = { 1, 0, 0, 0 },
 	.RuntimeCompatibility = SKSE::VersionIndependence::AddressLibrary
 );
 
