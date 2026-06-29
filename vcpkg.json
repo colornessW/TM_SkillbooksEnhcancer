@@ -1,0 +1,12 @@
+{
+  "name": "tm-skillbooks-enhcancer",
+  "version": "1.0.0",
+  "description": "Removes the skill advancement mechanic from reading skill books in Skyrim SE/AE/VR.",
+  "license": "MIT",
+  "supports": "windows & x64",
+  "dependencies": [
+    "fmt",
+    "spdlog",
+    "rapidcsv"
+  ]
+}
