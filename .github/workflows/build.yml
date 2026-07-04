@@ -18,10 +18,10 @@ jobs:
         with:
           repository: CharmedBaryon/CommonLibSSE-NG
           path: CommonLibSSE-NG
-          submodules: recursive
+          submodules: false
 
       - name: Configure CMake
-        run: cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/CommonLibSSE-NG/vcpkg/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        run: cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake"
 
       - name: Build Release
         run: cmake --build build --config Release
