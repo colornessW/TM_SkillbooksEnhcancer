@@ -10,8 +10,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    strategy:
-      fail-fast: false
 
     steps:
       - name: Checkout plugin
@@ -19,17 +17,13 @@ jobs:
 
       - name: Clone CommonLibSSE-NG
         run: |
-          git clone https://github.com/CharmedBaryon/CommonLibSSE-NG.git CommonLibSSE-NG --depth 1 --branch main
+          git clone https://github.com/CharmedBaryon/CommonLibSSE-NG.git CommonLibSSE-NG
           cd CommonLibSSE-NG
           git submodule update --init --recursive
 
-      - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
-
       - name: Configure CMake
-        run: >
-          cmake -B build -S . 
-          -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/CommonLibSSE-NG/vcpkg/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        run: |
+          cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/CommonLibSSE-NG/vcpkg/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
       - name: Build Release
         run: cmake --build build --config Release
