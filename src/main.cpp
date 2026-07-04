@@ -7,6 +7,25 @@ namespace
 
 	ActivateFunc_t OriginalActivate = nullptr;
 
+	void SendSkillBookReadEvent(RE::TESObjectBOOK* a_book)
+	{
+		auto* eventSource = SKSE::GetModCallbackEventSource();
+		if (!eventSource) {
+			SKSE::log::warn("ModCallbackEventSource not available, cannot send skill book event.");
+			return;
+		}
+
+		SKSE::ModCallbackEvent modEvent{
+			.eventName = "TM_SBE_OnSkillBookRead",
+			.strArg = "",
+			.numArg = 0.0f,
+			.sender = a_book
+		};
+		eventSource->SendEvent(&modEvent);
+
+		SKSE::log::debug("Sent TM_SBE_OnSkillBookRead event for book 0x{:08X}", a_book->GetFormID());
+	}
+
 	bool Hook_Activate(
 		RE::TESObjectBOOK* a_book,
 		RE::TESObjectREFR* a_targetRef,
@@ -26,6 +45,7 @@ namespace
 
 		if (wasSkillBook) {
 			flags.set(RE::OBJ_BOOK::Flag::kAdvancesActorValue);
+			SendSkillBookReadEvent(a_book);
 		}
 
 		return result;
@@ -45,7 +65,7 @@ namespace
 }
 
 SKSEPluginInfo(
-	.Version = { 1, 0, 0, 0 },
+	.Version = { 1, 1, 0, 0 },
 	.Name = "TM_SkillbooksEnhcancer",
 	.Author = "Thu'mundus",
 	.RuntimeCompatibility = SKSE::VersionIndependence::AddressLibrary

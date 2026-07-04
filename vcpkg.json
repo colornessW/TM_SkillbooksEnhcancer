@@ -1,7 +1,7 @@
 {
   "name": "tm-skillbooks-enhcancer",
-  "version": "1.0.0",
-  "description": "Removes the skill advancement mechanic from reading skill books in Skyrim SE/AE/VR.",
+  "version": "1.1.0",
+  "description": "Replaces skill book advancement with permanent skill-related enhancements. Compatible with Requiem/3BFTweaks.",
   "license": "MIT",
   "supports": "windows & x64",
   "dependencies": [

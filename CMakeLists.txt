@@ -12,8 +12,10 @@ set(ENABLE_SKYRIM_VR ON CACHE BOOL "Enable Skyrim VR support")
 set(BUILD_TESTS OFF CACHE BOOL "Disable CommonLibSSE-NG tests" FORCE)
 set(SKSE_SUPPORT_XBYAK OFF CACHE BOOL "Disable Xbyak" FORCE)
 
+set(COMMONLIBSSE_PATH "D:/WorkSpace/Thu'mundus/CommonLibSSE-NG" CACHE PATH "Path to CommonLibSSE-NG source tree")
+
 add_subdirectory(
-	"${CMAKE_CURRENT_SOURCE_DIR}/../CommonLibSSE-NG"
+	"${COMMONLIBSSE_PATH}"
 	"${CMAKE_CURRENT_BINARY_DIR}/CommonLibSSE-NG"
 )
 
